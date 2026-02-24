@@ -1,15 +1,16 @@
 :root {
     --bg-top: #000000;
-    --bg-bottom: #0a1326; /* subtle bluish-grey bottom */
+    --bg-bottom: #0a1326;
     --accent: #c375ff;
     --text: #f2f2ff;
-    --card-bg: rgba(12, 14, 32, 0.38); /* more transparent → see stars/nebula */
+    --card-bg: rgba(12, 14, 32, 0.38);
     --card-border: rgba(68, 68, 88, 0.7);
 }
 
 html,
 body {
     height: 100%;
+    min-height: 100dvh; /* iOS Safari white-strip killer */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -22,52 +23,17 @@ body {
     font-family: "Inter", system-ui, sans-serif;
 }
 
-@supports (height: 100dvh) {
-    html,
-    body {
-        height: 100dvh; /* dynamic viewport height — respects address bar */
-    }
-}
-
-#three-bg {
-    position: fixed;
-    inset: 0; /* top/right/bottom/left: 0 shorthand — more reliable */
-    width: 100%;
-    height: 100%;
-    min-height: -webkit-fill-available; /* iOS Safari hack for full coverage */
-    z-index: -1;
-    pointer-events: none;
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        left: 24px;
-        top: 32px;
-        gap: 20px;
-        z-index: 300; /* Extra high on mobile to stay on top */
-    }
-    main {
-        padding-left: 28px;
-        padding-right: 28px;
-        padding-top: 110px; /* Adjusted for iOS top inset */
-        max-width: 100%;
-    }
-    .card {
-        padding: 36px 32px;
-        margin-bottom: 28px;
-    }
-}
-/* Sidebar — unchanged, compact */
+/* Sidebar — fixed on desktop, perfectly safe on mobile */
 .sidebar {
     position: fixed;
     top: 48px;
     left: 52px;
-    z-index: 200;
+    z-index: 1000; /* high & consistent */
     display: flex;
     flex-direction: column;
     gap: 32px;
-    isolation: isolate; /* Creates new stacking context — helps Safari z-order */
-    will-change: transform; /* Forces hardware acceleration + repaint layer */
+    isolation: isolate;
+    will-change: transform;
 }
 .sidebar .logo img {
     height: 54px;
@@ -101,7 +67,7 @@ main {
     padding-bottom: 120px;
 }
 
-/* Cards — tighter vertical rhythm */
+/* Cards — bevel corner kept (works in Chrome/Opera, graceful round fallback on Safari) */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -113,24 +79,23 @@ main {
     border-bottom-right-radius: 20px;
     corner-shape: bevel;
     transition: all 0.4s ease;
-    overflow: hidden; /* prevents any inner content bleeding past the corner */
+    overflow: hidden;
 }
-
 .card:hover {
     transform: translateY(-7px);
     box-shadow: 0 28px 55px rgba(195, 117, 255, 0.16);
 }
+
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px; /* now matches vertical */
+    gap: 36px;
 }
 .two-column .card {
     margin-bottom: 0;
     padding: 44px 48px;
 }
 
-/* Rest unchanged (tagline, progress, btn, footer, responsive) */
 .tagline {
     font-size: 1.42rem;
     opacity: 0.96;
@@ -171,10 +136,10 @@ footer {
     font-size: 0.92rem;
 }
 
-/* Responsive — unchanged */
+/* ================= RESPONSIVE – NO MORE OVERLAP ================= */
 @media (max-width: 1100px) {
     main {
-        padding-left: 180px;
+        padding-left: 220px;
         max-width: 620px;
         padding-right: 40px;
     }
@@ -182,18 +147,45 @@ footer {
         left: 38px;
     }
 }
+
 @media (max-width: 768px) {
     .sidebar {
         left: 24px;
         top: 32px;
-        gap: 20px;
+        gap: 22px;
+        z-index: 1000;
+    }
+    .sidebar .logo img {
+        height: 48px;
     }
     main {
+        padding-top: 112px;
         padding-left: 28px;
         padding-right: 28px;
         max-width: 100%;
+        padding-bottom: 80px;
+    }
+    .card {
+        padding: 36px 32px;
+        margin-bottom: 28px;
+        border-bottom-right-radius: 16px; /* smaller bevel on phone */
     }
     .two-column {
         grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    .two-column .card {
+        padding: 34px 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        left: 18px;
+        top: 26px;
+    }
+    main {
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }

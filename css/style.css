@@ -10,7 +10,7 @@
 html,
 body {
     height: 100%;
-    min-height: 100dvh; /* iOS Safari white-strip killer */
+    min-height: 100dvh; /* fixes iOS white strips */
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -23,17 +23,15 @@ body {
     font-family: "Inter", system-ui, sans-serif;
 }
 
-/* Sidebar — fixed on desktop, perfectly safe on mobile */
+/* ================= DESKTOP (wide) ================= */
 .sidebar {
     position: fixed;
     top: 48px;
     left: 52px;
-    z-index: 1000; /* high & consistent */
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    isolation: isolate;
-    will-change: transform;
 }
 .sidebar .logo img {
     height: 54px;
@@ -57,7 +55,6 @@ body {
     padding-left: 8px;
 }
 
-/* Main content */
 main {
     padding-top: 128px;
     padding-left: 295px;
@@ -67,7 +64,7 @@ main {
     padding-bottom: 120px;
 }
 
-/* Cards — bevel corner kept (works in Chrome/Opera, graceful round fallback on Safari) */
+/* Cards & content */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -136,56 +133,50 @@ footer {
     font-size: 0.92rem;
 }
 
-/* ================= RESPONSIVE – NO MORE OVERLAP ================= */
-@media (max-width: 1100px) {
-    main {
-        padding-left: 220px;
-        max-width: 620px;
-        padding-right: 40px;
-    }
-    .sidebar {
-        left: 38px;
-    }
-}
-
+/* ================= MOBILE (<768px) ================= */
 @media (max-width: 768px) {
     .sidebar {
-        left: 24px;
-        top: 32px;
-        gap: 22px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        right: 20px;
         z-index: 1000;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        flex-wrap: wrap;
     }
-    .sidebar .logo img {
-        height: 48px;
+    .sidebar nav {
+        flex-direction: row;
+        gap: 18px;
+        flex: 1;
+        justify-content: flex-end;
     }
+    .sidebar nav a {
+        font-size: 15px;
+        padding: 8px 0;
+    }
+
     main {
-        padding-top: 112px;
-        padding-left: 28px;
-        padding-right: 28px;
+        padding-top: 110px; /* logo + nav height */
+        padding-left: 20px;
+        padding-right: 20px;
         max-width: 100%;
         padding-bottom: 80px;
     }
+
     .card {
         padding: 36px 32px;
         margin-bottom: 28px;
-        border-bottom-right-radius: 16px; /* smaller bevel on phone */
+        border-bottom-right-radius: 16px;
     }
+
     .two-column {
         grid-template-columns: 1fr;
         gap: 28px;
     }
     .two-column .card {
         padding: 34px 28px;
-    }
-}
-
-@media (max-width: 480px) {
-    .sidebar {
-        left: 18px;
-        top: 26px;
-    }
-    main {
-        padding-left: 20px;
-        padding-right: 20px;
     }
 }

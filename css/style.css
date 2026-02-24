@@ -82,16 +82,16 @@ main {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-bottom-left-radius: 0;
-    border-bottom-right-radius: 20px; /* adjust this value to taste — 16–24px looks good */
-    corner-shape: bevel; /* makes the bottom-right corner straight-cut instead of curved */
+    border-bottom-right-radius: 20px;
+    corner-shape: bevel;
     transition: all 0.4s ease;
+    overflow: hidden; /* prevents any inner content bleeding past the corner */
 }
 
 .card:hover {
     transform: translateY(-7px);
     box-shadow: 0 28px 55px rgba(195, 117, 255, 0.16);
 }
-
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;

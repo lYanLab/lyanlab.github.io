@@ -12,6 +12,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
     background: linear-gradient(
         to bottom,
         var(--bg-top) 0%,
@@ -21,16 +22,41 @@ body {
     font-family: "Inter", system-ui, sans-serif;
 }
 
+@supports (height: 100dvh) {
+    html,
+    body {
+        height: 100dvh; /* dynamic viewport height — respects address bar */
+    }
+}
+
 #three-bg {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0; /* top/right/bottom/left: 0 shorthand — more reliable */
     width: 100%;
     height: 100%;
+    min-height: -webkit-fill-available; /* iOS Safari hack for full coverage */
     z-index: -1;
     pointer-events: none;
 }
 
+@media (max-width: 768px) {
+    .sidebar {
+        left: 24px;
+        top: 32px;
+        gap: 20px;
+        z-index: 300; /* Extra high on mobile to stay on top */
+    }
+    main {
+        padding-left: 28px;
+        padding-right: 28px;
+        padding-top: 110px; /* Adjusted for iOS top inset */
+        max-width: 100%;
+    }
+    .card {
+        padding: 36px 32px;
+        margin-bottom: 28px;
+    }
+}
 /* Sidebar — unchanged, compact */
 .sidebar {
     position: fixed;
@@ -40,6 +66,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    isolation: isolate; /* Creates new stacking context — helps Safari z-order */
+    will-change: transform; /* Forces hardware acceleration + repaint layer */
 }
 .sidebar .logo img {
     height: 54px;

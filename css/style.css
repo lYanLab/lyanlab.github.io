@@ -1,9 +1,15 @@
 :root {
-    --bg: #000000;
+    --bg-top: #000000;
+    --bg-bottom: #0a1328; /* deep bluish-grey */
     --accent: #c375ff;
     --text: #f2f2ff;
-    --card-bg: rgba(12, 14, 32, 0.52);
-    --card-border: rgba(68, 68, 88, 0.58);
+    --card-bg: rgba(
+        12,
+        14,
+        32,
+        0.42
+    ); /* slightly more transparent for nebula visibility */
+    --card-border: rgba(68, 68, 88, 0.65);
 }
 
 html,
@@ -11,7 +17,11 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    background: var(--bg);
+    background: linear-gradient(
+        to bottom,
+        var(--bg-top) 0%,
+        var(--bg-bottom) 100%
+    );
     color: var(--text);
     font-family: "Inter", system-ui, sans-serif;
 }
@@ -26,7 +36,7 @@ body {
     pointer-events: none;
 }
 
-/* Compact sidebar pinned to left edge */
+/* Compact sidebar */
 .sidebar {
     position: fixed;
     top: 48px;
@@ -58,22 +68,22 @@ body {
     padding-left: 8px;
 }
 
-/* Main content — narrower, floating, starts exactly at nav level */
+/* Main content — narrower floating layout */
 main {
-    padding-top: 128px; /* aligned with › Home */
+    padding-top: 128px;
     padding-left: 295px;
-    padding-right: 60px; /* breathing room right */
-    max-width: 650px; /* 25% less wide */
+    padding-right: 60px;
+    max-width: 650px;
     margin: 0 auto;
     padding-bottom: 120px;
 }
 
-/* Unified cards — same sharp cut */
+/* Cards — consistent 36px vertical rhythm */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
-    margin-bottom: 60px;
+    margin-bottom: 36px; /* ← fixed spacing */
     clip-path: polygon(0 0, 100% 0, 100% 91%, 95% 100%, 0 100%);
     transition: all 0.4s ease;
 }
@@ -85,7 +95,7 @@ main {
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 36px; /* matches vertical gap */
 }
 .two-column .card {
     margin-bottom: 0;
@@ -98,7 +108,7 @@ main {
     margin-bottom: 22px;
 }
 
-/* Progress + buttons */
+/* Progress + button */
 .progress-bar {
     height: 6px;
     background: rgba(255, 255, 255, 0.09);

@@ -78,10 +78,15 @@ main {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
-    margin-bottom: 36px; /* ← key fix: was 60px */
-    clip-path: polygon(0 0, 100% 0, 100% 91%, 95% 100%, 0 100%);
+    margin-bottom: 36px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 20px; /* adjust this value to taste — 16–24px looks good */
+    corner-shape: bevel; /* makes the bottom-right corner straight-cut instead of curved */
     transition: all 0.4s ease;
 }
+
 .card:hover {
     transform: translateY(-7px);
     box-shadow: 0 28px 55px rgba(195, 117, 255, 0.16);

@@ -1,15 +1,10 @@
 :root {
     --bg-top: #000000;
-    --bg-bottom: #0a1328; /* deep bluish-grey */
+    --bg-bottom: #0a1326; /* subtle bluish-grey bottom */
     --accent: #c375ff;
     --text: #f2f2ff;
-    --card-bg: rgba(
-        12,
-        14,
-        32,
-        0.42
-    ); /* slightly more transparent for nebula visibility */
-    --card-border: rgba(68, 68, 88, 0.65);
+    --card-bg: rgba(12, 14, 32, 0.38); /* more transparent → see stars/nebula */
+    --card-border: rgba(68, 68, 88, 0.7);
 }
 
 html,
@@ -36,7 +31,7 @@ body {
     pointer-events: none;
 }
 
-/* Compact sidebar */
+/* Sidebar — unchanged, compact */
 .sidebar {
     position: fixed;
     top: 48px;
@@ -68,7 +63,7 @@ body {
     padding-left: 8px;
 }
 
-/* Main content — narrower floating layout */
+/* Main content */
 main {
     padding-top: 128px;
     padding-left: 295px;
@@ -78,12 +73,12 @@ main {
     padding-bottom: 120px;
 }
 
-/* Cards — consistent 36px vertical rhythm */
+/* Cards — tighter vertical rhythm */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
-    margin-bottom: 36px; /* ← fixed spacing */
+    margin-bottom: 36px; /* ← key fix: was 60px */
     clip-path: polygon(0 0, 100% 0, 100% 91%, 95% 100%, 0 100%);
     transition: all 0.4s ease;
 }
@@ -95,20 +90,20 @@ main {
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 36px; /* matches vertical gap */
+    gap: 36px; /* now matches vertical */
 }
 .two-column .card {
     margin-bottom: 0;
     padding: 44px 48px;
 }
 
+/* Rest unchanged (tagline, progress, btn, footer, responsive) */
 .tagline {
     font-size: 1.42rem;
     opacity: 0.96;
     margin-bottom: 22px;
 }
 
-/* Progress + button */
 .progress-bar {
     height: 6px;
     background: rgba(255, 255, 255, 0.09);
@@ -143,7 +138,7 @@ footer {
     font-size: 0.92rem;
 }
 
-/* Responsive */
+/* Responsive — unchanged */
 @media (max-width: 1100px) {
     main {
         padding-left: 180px;

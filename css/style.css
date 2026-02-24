@@ -1,0 +1,161 @@
+:root {
+    --bg: #000000;
+    --accent: #c375ff;
+    --text: #f2f2ff;
+    --card-bg: rgba(12, 14, 32, 0.52);
+    --card-border: rgba(68, 68, 88, 0.58);
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, sans-serif;
+}
+
+#three-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Compact sidebar pinned to left edge */
+.sidebar {
+    position: fixed;
+    top: 48px;
+    left: 52px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+.sidebar .logo img {
+    height: 54px;
+    filter: drop-shadow(0 0 12px rgba(195, 117, 255, 0.3));
+}
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.sidebar nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.94;
+    transition: all 0.35s ease;
+}
+.sidebar nav a:hover {
+    color: var(--accent);
+    padding-left: 8px;
+}
+
+/* Main content — narrower, floating, starts exactly at nav level */
+main {
+    padding-top: 128px; /* aligned with › Home */
+    padding-left: 295px;
+    padding-right: 60px; /* breathing room right */
+    max-width: 650px; /* 25% less wide */
+    margin: 0 auto;
+    padding-bottom: 120px;
+}
+
+/* Unified cards — same sharp cut */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 48px 52px;
+    margin-bottom: 60px;
+    clip-path: polygon(0 0, 100% 0, 100% 91%, 95% 100%, 0 100%);
+    transition: all 0.4s ease;
+}
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 28px 55px rgba(195, 117, 255, 0.16);
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+.two-column .card {
+    margin-bottom: 0;
+    padding: 44px 48px;
+}
+
+.tagline {
+    font-size: 1.42rem;
+    opacity: 0.96;
+    margin-bottom: 22px;
+}
+
+/* Progress + buttons */
+.progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.09);
+    margin: 22px 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 23%;
+    background: linear-gradient(90deg, #c375ff, #6a3fd1);
+}
+
+.btn {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 13px 34px;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.btn:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+footer {
+    text-align: center;
+    padding: 60px 20px;
+    opacity: 0.65;
+    font-size: 0.92rem;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+    main {
+        padding-left: 180px;
+        max-width: 620px;
+        padding-right: 40px;
+    }
+    .sidebar {
+        left: 38px;
+    }
+}
+@media (max-width: 768px) {
+    .sidebar {
+        left: 24px;
+        top: 32px;
+        gap: 20px;
+    }
+    main {
+        padding-left: 28px;
+        padding-right: 28px;
+        max-width: 100%;
+    }
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+}

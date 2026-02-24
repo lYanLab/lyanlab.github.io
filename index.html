@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LyanLab • Home</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    </head>
+    <body>
+        <canvas id="three-bg"></canvas>
+
+        <div class="sidebar">
+            <div class="logo">
+                <img src="assets/logo-y.jpg" alt="LyanLab" />
+            </div>
+            <nav>
+                <a href="index.html">› Home</a>
+                <a href="gallery.html">› Gallery</a>
+                <a href="ndmind.html">› NDMind</a>
+                <a href="mentoring.html">› Mentoring</a>
+                <a href="etherealrealm.html">› EtherealRealm</a>
+            </nav>
+        </div>
+
+        <main>
+            <!-- Description card first -->
+            <section class="card">
+                <p class="tagline">
+                    Bridging technical precision with pure imagination
+                </p>
+                <p>3D artist • AI explorer • Creator of digital companions</p>
+                <p>
+                    Turning complex tools into creative freedom — one nebula at
+                    a time.
+                </p>
+            </section>
+
+            <!-- Side-by-side -->
+            <div class="two-column">
+                <section class="card">
+                    <h2>NDMind</h2>
+                    <p>Awakening progress • <span id="progress">23%</span></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <p class="subtle">The veil thins...</p>
+                </section>
+                <section class="card">
+                    <h2>Mentoring</h2>
+                    <p>1:1 guidance for 3D artists &amp; AI creators</p>
+                    <p>From Houdini mastery to artistic AI workflows.</p>
+                    <a
+                        href="https://calendly.com/lyanlab"
+                        class="btn"
+                        target="_blank"
+                        >Book a session</a
+                    >
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                © 2026 LyanLab • Built with curiosity and a little help from
+                the stars
+            </p>
+        </footer>
+
+        <script src="js/three-bg.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

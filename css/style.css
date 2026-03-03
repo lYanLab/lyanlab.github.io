@@ -1,63 +1,70 @@
 :root {
-    --bg-top: #000000;
-    --bg-bottom: #0a1326;
+    --bg: #000000;
     --accent: #c375ff;
     --text: #f2f2ff;
-    --card-bg: rgba(12, 14, 32, 0.38);
-    --card-border: rgba(68, 68, 88, 0.7);
+    --card-bg: rgba(15, 18, 35, 0.92);
+    --card-border: rgba(70, 70, 90, 0.65);
 }
 
 html,
 body {
-    height: 100%;
-    min-height: 100dvh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    background: linear-gradient(
-        to bottom,
-        var(--bg-top) 0%,
-        var(--bg-bottom) 100%
-    );
+    background: var(--bg);
     color: var(--text);
     font-family: "Inter", system-ui, sans-serif;
+    line-height: 1.6;
 }
 
-/* ================= DESKTOP (>768px) ================= */
-.sidebar {
+/* Top Bar */
+.top-bar {
     position: fixed;
-    top: 48px;
-    left: 52px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 78px;
+    background: rgba(0, 0, 0, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(195, 117, 255, 0.12);
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
     z-index: 1000;
+    gap: 48px;
+}
+
+.logo img {
+    height: 52px;
+}
+
+.main-nav {
     display: flex;
-    flex-direction: column;
     gap: 32px;
+    flex: 1;
+    justify-content: center;
 }
-.desktop-nav {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-.desktop-nav a {
+.main-nav a {
     color: var(--text);
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    opacity: 0.94;
-    transition: all 0.35s ease;
+    font-size: 1.05rem;
+    padding: 8px 0;
+    opacity: 0.9;
+    transition: all 0.3s ease;
 }
-.desktop-nav a:hover {
+.main-nav a:hover,
+.main-nav a.active {
     color: var(--accent);
-    padding-left: 8px;
+    opacity: 1;
 }
 
+/* Content area */
 main {
-    padding-top: 128px;
-    padding-left: 295px;
-    padding-right: 60px;
-    max-width: 650px;
+    padding-top: 110px;
+    max-width: 720px;
     margin: 0 auto;
-    padding-bottom: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 140px;
 }
 
 /* Cards */
@@ -65,64 +72,50 @@ main {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
-    margin-bottom: 36px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 20px;
-    corner-shape: bevel;
-    transition: all 0.4s ease;
-    overflow: hidden;
+    margin-bottom: 48px;
+    border-radius: 8px;
+    transition: transform 0.4s ease;
 }
 .card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 28px 55px rgba(195, 117, 255, 0.16);
+    transform: translateY(-6px);
 }
 
-.two-column {
+/* Gallery Masonry (handles 16/9, 3/2, 9/16 perfectly) */
+.gallery-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
 }
-.two-column .card {
-    margin-bottom: 0;
-    padding: 44px 48px;
+.gallery-grid img,
+.gallery-grid video {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+}
+.gallery-grid img:hover,
+.gallery-grid video:hover {
+    transform: scale(1.03);
 }
 
-.tagline {
-    font-size: 1.42rem;
-    opacity: 0.96;
-    margin-bottom: 22px;
-}
-.progress-bar {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.09);
-    margin: 22px 0;
-    border-radius: 4px;
+/* Pinned hero on gallery */
+.pinned-hero {
+    margin-bottom: 64px;
+    border-radius: 12px;
     overflow: hidden;
+    border: 1px solid rgba(195, 117, 255, 0.15);
 }
-.progress-fill {
-    height: 100%;
-    width: 23%;
-    background: linear-gradient(90deg, #c375ff, #6a3fd1);
-}
-.btn {
-    display: inline-block;
-    background: transparent;
-    border: 2px solid var(--accent);
-    color: var(--accent);
-    padding: 13px 34px;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-.btn:hover {
-    background: var(--accent);
-    color: #000;
+.pinned-hero img,
+.pinned-hero video {
+    width: 100%;
+    display: block;
 }
 
-/* Footer aligned to content */
+/* Footer centered under content */
 footer {
-    max-width: 650px;
+    max-width: 720px;
     margin: 0 auto;
     text-align: center;
     padding: 60px 20px;
@@ -130,87 +123,24 @@ footer {
     font-size: 0.92rem;
 }
 
-/* ================= MOBILE (<768px) ================= */
+/* Mobile */
 @media (max-width: 768px) {
-    .sidebar {
-        position: fixed;
-        top: 16px;
-        left: 20px;
-        right: 20px;
-        z-index: 1000;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 16px;
-        background: rgba(10, 19, 38, 0.96);
-        border-radius: 12px;
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+    .top-bar {
+        padding: 0 20px;
+        height: 68px;
+        gap: 20px;
     }
     .logo img {
-        height: 42px;
+        height: 44px;
     }
-
-    .desktop-nav {
-        display: none;
+    .main-nav {
+        gap: 16px;
+        font-size: 1rem;
     }
-
-    /* Hamburger */
-    .hamburger {
-        font-size: 32px;
-        cursor: pointer;
-        color: var(--text);
-        padding: 4px 12px;
-        line-height: 1;
-    }
-    .menu-toggle {
-        display: none;
-    }
-
-    /* Dropdown */
-    .mobile-nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(10, 19, 38, 0.98);
-        border-radius: 0 0 12px 12px;
-        padding: 20px;
-        margin-top: 8px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-        flex-direction: column;
-        gap: 18px;
-    }
-    .menu-toggle:checked ~ .mobile-nav {
-        display: flex;
-    }
-    .mobile-nav a {
-        color: var(--text);
-        text-decoration: none;
-        font-size: 17px;
-        opacity: 0.94;
-    }
-    .mobile-nav a:hover {
-        color: var(--accent);
-    }
-
     main {
-        padding-top: 102px;
-        padding-left: 20px;
-        padding-right: 20px;
-        max-width: 100%;
-        padding-bottom: 80px;
+        padding-top: 90px;
     }
     .card {
-        padding: 36px 32px;
-        margin-bottom: 28px;
-        border-bottom-right-radius: 16px;
-    }
-    .two-column {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-    .two-column .card {
-        padding: 34px 28px;
+        padding: 36px 28px;
     }
 }

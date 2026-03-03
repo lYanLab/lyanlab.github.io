@@ -1,21 +1,38 @@
-// Simple lightbox
+// Lightbox for images AND videos
 function createLightbox() {
   const lb = document.createElement("div");
   lb.id = "lightbox";
   lb.style.cssText =
-    "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,15,46,0.95);display:none;align-items:center;justify-content:center;z-index:1000;";
-  lb.innerHTML = `<img id="lb-img" style="max-width:90%;max-height:90%;border:1px solid #C375FF;border-radius:4px;">`;
+    "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.96);display:none;align-items:center;justify-content:center;z-index:2000;backdrop-filter:blur(8px);";
+  lb.innerHTML = `
+    <div style="position:relative;max-width:92%;max-height:92%;">
+      <div id="lb-content"></div>
+      <div onclick="document.getElementById('lightbox').style.display='none'" style="position:absolute;top:-20px;right:-20px;color:#fff;font-size:32px;cursor:pointer;">×</div>
+    </div>
+  `;
   document.body.appendChild(lb);
-
-  lb.addEventListener("click", () => (lb.style.display = "none"));
 }
 
 createLightbox();
 
-// Example: click any gallery img → open lightbox
 document.addEventListener("click", (e) => {
-  if (e.target.tagName === "IMG" && e.target.closest("#gallery-grid")) {
-    document.getElementById("lb-img").src = e.target.src;
+  if (
+    e.target.tagName === "IMG" &&
+    e.target.closest(".gallery-grid, .pinned-hero")
+  ) {
+    const src = e.target.src;
+    const content = document.getElementById("lb-content");
+    content.innerHTML = `<img src="${src}" style="max-width:100%;max-height:90vh;border-radius:8px;">`;
+    document.getElementById("lightbox").style.display = "flex";
+  }
+
+  if (
+    e.target.tagName === "VIDEO" &&
+    e.target.closest(".gallery-grid, .pinned-hero")
+  ) {
+    const src = e.target.src;
+    const content = document.getElementById("lb-content");
+    content.innerHTML = `<video src="${src}" controls autoplay style="max-width:100%;max-height:90vh;border-radius:8px;"></video>`;
     document.getElementById("lightbox").style.display = "flex";
   }
 });

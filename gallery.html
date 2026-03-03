@@ -9,51 +9,47 @@
             rel="stylesheet"
         />
         <link rel="stylesheet" href="css/style.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     </head>
     <body>
-        <div class="sidebar">
-            <div class="logo">
-                <img src="assets/logo-y.jpg" alt="LyanLab" />
+        <header>
+            <div class="top-bar">
+                <div class="logo">
+                    <img src="assets/logo-y.jpg" alt="LyanLab" />
+                </div>
+                <nav class="main-nav">
+                    <a href="index.html">Home</a>
+                    <a href="bio.html">Bio</a>
+                    <a href="mentoring.html">Mentoring</a>
+                    <a href="gallery.html" class="active">Gallery</a>
+                    <a href="ndmind.html">NDMind</a>
+                    <a href="etherealrealm.html">EtherealRealm</a>
+                </nav>
             </div>
-
-            <!-- Desktop vertical nav -->
-            <nav class="desktop-nav">
-                <a href="index.html">› Home</a>
-                <a href="gallery.html">› Gallery</a>
-                <a href="ndmind.html">› NDMind</a>
-                <a href="mentoring.html">› Mentoring</a>
-                <a href="etherealrealm.html">› EtherealRealm</a>
-            </nav>
-
-            <!-- Mobile hamburger + dropdown -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle" />
-            <label for="menu-toggle" class="hamburger">☰</label>
-
-            <nav class="mobile-nav">
-                <a href="index.html">› Home</a>
-                <a href="gallery.html">› Gallery</a>
-                <a href="ndmind.html">› NDMind</a>
-                <a href="mentoring.html">› Mentoring</a>
-                <a href="etherealrealm.html">› EtherealRealm</a>
-            </nav>
-        </div>
+        </header>
 
         <main>
-            <section class="card">
-                <h2>Gallery</h2>
-                <p>Recent 3D &amp; AI creations from X — coming very soon.</p>
-                <p>
-                    High-res prints, NFTs and 8K files will be available here.
-                </p>
-            </section>
+            <!-- Pinned hero (replace src with your _pin file or remove the whole block) -->
+            <div class="pinned-hero">
+                <img
+                    src="assets/gallery/your-art-pin.jpg"
+                    alt="Featured Work"
+                />
+                <!-- Or for video: <video src="assets/gallery/your-clip-pin.mp4" poster="assets/gallery/your-art-pin.jpg" autoplay muted loop></video> -->
+            </div>
+
+            <h2 style="margin-bottom: 32px; text-align: center">
+                Selected Works
+            </h2>
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Add your 12 pieces here — example: -->
+                <!-- <img src="assets/gallery/art-01.jpg" alt=""> -->
+                <!-- <video src="assets/gallery/clip-02.mp4" poster="assets/gallery/art-02.jpg" muted loop></video> -->
+            </div>
         </main>
 
         <footer>
-            <p>
-                © 2026 LyanLab • Built with curiosity and a little help from
-                the stars
-            </p>
+            © 2026 LyanLab • Built with curiosity and a little help from the
+            stars
         </footer>
 
         <script src="js/main.js"></script>

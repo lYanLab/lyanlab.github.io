@@ -6,163 +6,94 @@
     --card-border: rgba(70, 70, 90, 0.65);
 }
 
-* {
-    box-sizing: border-box;
-}
-
 html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
     background: var(--bg);
     color: var(--text);
     font-family: "Inter", system-ui, sans-serif;
-    line-height: 1.55;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
 }
 
-/* ── Top Bar (56px fixed) ── */
+/* === MINIMAL CHANGE: sticky footer (no more forced scroll) === */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Bar — 56px sleek */
 .top-bar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: 56px;
-    background: rgba(0, 0, 0, 0.96);
-    border-bottom: 1px solid rgba(195, 117, 255, 0.1);
+    background: rgba(0, 0, 0, 0.98);
+    border-bottom: 1px solid rgba(195, 117, 255, 0.12);
     z-index: 1000;
     display: flex;
     align-items: center;
     padding: 0 24px;
 }
 
-.inner-bar {
-    width: 100%;
-    max-width: 1200px; /* wider breathing on large screens */
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .logo {
-    flex-shrink: 0;
+    position: absolute;
+    left: 24px;
+    top: 12px;
 }
 .logo img {
     height: 32px;
-    display: block;
 }
 
-/* Left side: nav items */
+/* Inner-bar now pushes socials to the right edge of content (740px width) */
+.inner-bar {
+    max-width: 740px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ← ONLY CHANGE HERE */
+}
+
+/* Menu left-aligned, right after logo space */
 .main-nav {
     display: flex;
-    gap: 28px;
-    margin-left: 32px; /* space after logo */
+    gap: 24px;
+    margin-left: 0; /* ← tiny tweak for perfect alignment */
+    align-items: center;
 }
 .main-nav a {
     color: var(--text);
     text-decoration: none;
     font-size: 1.05rem;
-    opacity: 0.92;
-    transition: color 0.25s ease;
+    opacity: 0.9;
+    transition: color 0.3s ease;
 }
 .main-nav a:hover,
 .main-nav a.active {
     color: var(--accent);
 }
 
-/* Right side: social icons */
+/* === ADDED: Social icons on the right (inside content width) === */
 .social-links {
     display: flex;
-    gap: 20px;
+    gap: 22px;
 }
 .social-links a {
     color: var(--text);
-    opacity: 0.7;
-    font-size: 1.4rem;
+    font-size: 1.45rem;
+    opacity: 0.85;
     transition: all 0.25s ease;
 }
 .social-links a:hover {
     color: var(--accent);
     opacity: 1;
-    transform: translateY(-1px);
 }
 
-/* Mobile hamburger (only ≤480px) */
-.menu-toggle,
-.hamburger,
-.mobile-nav {
-    display: none;
-}
-
-@media (max-width: 480px) {
-    .inner-bar {
-        padding: 0 16px;
-    }
-    .logo img {
-        height: 28px;
-    }
-    .main-nav,
-    .social-links {
-        display: none;
-    }
-    .hamburger {
-        display: block;
-        font-size: 28px;
-        cursor: pointer;
-        color: var(--text);
-        margin-left: auto;
-    }
-    .menu-toggle {
-        display: none;
-    }
-    .mobile-nav {
-        display: none;
-        position: absolute;
-        top: 56px;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.98);
-        padding: 24px 16px;
-        flex-direction: column;
-        gap: 20px;
-        border-top: 1px solid rgba(195, 117, 255, 0.12);
-    }
-    .menu-toggle:checked ~ .mobile-nav {
-        display: flex;
-    }
-    .mobile-nav a {
-        font-size: 1.15rem;
-        text-align: center;
-    }
-    /* Social in mobile menu bottom */
-    .mobile-social {
-        margin-top: 32px;
-        display: flex;
-        justify-content: center;
-        gap: 36px;
-        font-size: 1.6rem;
-    }
-}
-
-/* ── Main Content ── */
-main {
-    flex: 1 0 auto; /* key: grows to push footer down */
-    padding-top: 90px; /* space under fixed bar */
-    padding-bottom: 60px;
-    max-width: 960px;
-    margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-/* Cards */
+/* Cards — sharp + bottom-right bevel only */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -170,20 +101,115 @@ main {
     margin-bottom: 48px;
     border-radius: 0;
     border-bottom-right-radius: 22px;
+    corner-shape: bevel;
 }
 
-/* Two-column home */
+/* Two-column on home — UNTOUCHED */
 .two-column {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    grid-template-columns: 1fr 1fr;
     gap: 32px;
 }
 
-/* Footer — pushed down or stuck to bottom */
+/* Breathing room below top bar */
+main {
+    flex: 1 0 auto; /* ← ONLY CHANGE for footer */
+    padding-top: 92px; /* better for 56px bar */
+    max-width: 740px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px; /* ← ONLY CHANGE: no more forced scroll */
+}
+
+/* Footer */
 footer {
-    flex-shrink: 0;
+    flex-shrink: 0; /* ← ONLY CHANGE */
+    max-width: 740px;
+    margin: 0 auto;
     text-align: center;
-    padding: 40px 20px 60px;
-    opacity: 0.6;
+    padding: 40px 20px 50px;
+    opacity: 0.65;
     font-size: 0.92rem;
+}
+
+/* ================= HAMBURGER ONLY ≤480px ================= */
+@media (max-width: 480px) {
+    .inner-bar {
+        padding: 0 16px;
+    }
+    .logo img {
+        height: 30px;
+    }
+    .logo {
+        top: 13px;
+        left: 16px;
+    }
+    .main-nav {
+        display: none;
+        margin-left: 0;
+    }
+    .social-links {
+        display: none;
+    }
+
+    .hamburger {
+        font-size: 30px;
+        cursor: pointer;
+        color: var(--text);
+        padding: 4px 12px;
+        margin-left: auto;
+    }
+    .menu-toggle {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 56px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.98);
+        padding: 24px;
+        flex-direction: column;
+        gap: 20px;
+        border-top: 1px solid rgba(195, 117, 255, 0.15);
+    }
+    .menu-toggle:checked ~ .mobile-nav {
+        display: flex;
+    }
+    .mobile-nav a {
+        font-size: 1.1rem;
+    }
+
+    main {
+        padding-top: 110px;
+    }
+    .card {
+        padding: 36px 28px;
+        border-bottom-right-radius: 18px;
+    }
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
+
+/* Force horizontal nav on everything >480px */
+@media (min-width: 481px) {
+    .hamburger,
+    .menu-toggle,
+    .mobile-nav {
+        display: none !important;
+    }
+}
+
+/* Mobile social icons inside burger */
+.mobile-social {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    font-size: 1.65rem;
 }

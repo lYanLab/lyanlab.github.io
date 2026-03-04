@@ -16,7 +16,7 @@ body {
     line-height: 1.6;
 }
 
-/* Top Bar — smaller & sleek */
+/* Top Bar — sleek & compact */
 .top-bar {
     position: fixed;
     top: 0;
@@ -62,19 +62,21 @@ body {
     color: var(--accent);
 }
 
-/* Cards with bevel corner restored */
+/* Cards — sharp corners except bottom-right bevel */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
     margin-bottom: 48px;
-    border-radius: 8px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
     border-bottom-right-radius: 22px;
-    corner-shape: bevel;
+    corner-shape: bevel; /* only bottom-right bevel */
     transition: all 0.3s ease;
 }
 
-/* No distracting hover lift */
+/* No hover movement — just subtle shadow */
 .card:hover {
     box-shadow: 0 20px 40px rgba(195, 117, 255, 0.12);
 }
@@ -86,9 +88,9 @@ body {
     gap: 32px;
 }
 
-/* More breathing room below top bar */
+/* Content area with breathing room */
 main {
-    padding-top: 150px;
+    padding-top: 150px; /* more space below top bar */
     max-width: 740px;
     margin: 0 auto;
     padding-left: 20px;
@@ -106,7 +108,7 @@ footer {
     font-size: 0.92rem;
 }
 
-/* ================= MOBILE HAMBURGER DROPDOWN (under 768px) ================= */
+/* ================= MOBILE / NARROW (<768px) ================= */
 @media (max-width: 768px) {
     .inner-bar {
         padding: 0 16px;
@@ -114,6 +116,8 @@ footer {
     .logo img {
         height: 42px;
     }
+
+    /* Hide desktop nav */
     .main-nav {
         display: none;
     }
@@ -129,6 +133,7 @@ footer {
         display: none;
     }
 
+    /* Dropdown */
     .mobile-nav {
         display: none;
         position: absolute;
@@ -153,10 +158,18 @@ footer {
     }
     .card {
         padding: 36px 28px;
-        border-bottom-right-radius: 18px;
     }
     .two-column {
         grid-template-columns: 1fr;
         gap: 28px;
+    }
+}
+
+/* Hide mobile elements on wide screens */
+@media (min-width: 769px) {
+    .hamburger,
+    .menu-toggle,
+    .mobile-nav {
+        display: none !important;
     }
 }

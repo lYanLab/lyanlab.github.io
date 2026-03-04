@@ -16,32 +16,38 @@ body {
     line-height: 1.6;
 }
 
-/* Top Bar */
+/* Top Bar — smaller & sleek */
 .top-bar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 78px;
-    background: rgba(0, 0, 0, 0.96);
-    backdrop-filter: blur(12px);
+    height: 68px;
+    background: rgba(0, 0, 0, 0.98);
     border-bottom: 1px solid rgba(195, 117, 255, 0.12);
+    z-index: 1000;
     display: flex;
     align-items: center;
-    padding: 0 40px;
-    z-index: 1000;
-    gap: 48px;
+}
+
+.inner-bar {
+    max-width: 740px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo img {
-    height: 52px;
+    height: 46px;
 }
 
+/* Desktop nav */
 .main-nav {
     display: flex;
     gap: 32px;
-    flex: 1;
-    justify-content: center;
 }
 .main-nav a {
     color: var(--text);
@@ -49,73 +55,50 @@ body {
     font-size: 1.05rem;
     padding: 8px 0;
     opacity: 0.9;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 .main-nav a:hover,
 .main-nav a.active {
     color: var(--accent);
-    opacity: 1;
 }
 
-/* Content area */
-main {
-    padding-top: 110px;
-    max-width: 720px;
-    margin: 0 auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 140px;
-}
-
-/* Cards */
+/* Cards with bevel corner restored */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
     margin-bottom: 48px;
     border-radius: 8px;
-    transition: transform 0.4s ease;
+    border-bottom-right-radius: 22px;
+    corner-shape: bevel;
+    transition: all 0.3s ease;
 }
+
+/* No distracting hover lift */
 .card:hover {
-    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(195, 117, 255, 0.12);
 }
 
-/* Gallery Masonry (handles 16/9, 3/2, 9/16 perfectly) */
-.gallery-grid {
+/* Two-column on home */
+.two-column {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-.gallery-grid img,
-.gallery-grid video {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    object-fit: cover;
-}
-.gallery-grid img:hover,
-.gallery-grid video:hover {
-    transform: scale(1.03);
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
 }
 
-/* Pinned hero on gallery */
-.pinned-hero {
-    margin-bottom: 64px;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid rgba(195, 117, 255, 0.15);
-}
-.pinned-hero img,
-.pinned-hero video {
-    width: 100%;
-    display: block;
+/* More breathing room below top bar */
+main {
+    padding-top: 150px;
+    max-width: 740px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 140px;
 }
 
-/* Footer centered under content */
+/* Footer aligned to content */
 footer {
-    max-width: 720px;
+    max-width: 740px;
     margin: 0 auto;
     text-align: center;
     padding: 60px 20px;
@@ -123,24 +106,57 @@ footer {
     font-size: 0.92rem;
 }
 
-/* Mobile */
+/* ================= MOBILE HAMBURGER DROPDOWN (under 768px) ================= */
 @media (max-width: 768px) {
-    .top-bar {
-        padding: 0 20px;
-        height: 68px;
-        gap: 20px;
+    .inner-bar {
+        padding: 0 16px;
     }
     .logo img {
-        height: 44px;
+        height: 42px;
     }
     .main-nav {
-        gap: 16px;
-        font-size: 1rem;
+        display: none;
     }
+
+    /* Hamburger */
+    .hamburger {
+        font-size: 30px;
+        cursor: pointer;
+        color: var(--text);
+        padding: 4px 12px;
+    }
+    .menu-toggle {
+        display: none;
+    }
+
+    .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.98);
+        padding: 24px;
+        flex-direction: column;
+        gap: 20px;
+        border-top: 1px solid rgba(195, 117, 255, 0.15);
+    }
+    .menu-toggle:checked ~ .mobile-nav {
+        display: flex;
+    }
+    .mobile-nav a {
+        font-size: 1.1rem;
+    }
+
     main {
-        padding-top: 90px;
+        padding-top: 118px;
     }
     .card {
         padding: 36px 28px;
+        border-bottom-right-radius: 18px;
+    }
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
 }

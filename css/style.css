@@ -13,10 +13,9 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: "Inter", system-ui, sans-serif;
-    line-height: 1.6;
 }
 
-/* Top Bar — sleek & compact */
+/* Top Bar — smaller & sleek */
 .top-bar {
     position: fixed;
     top: 0;
@@ -26,8 +25,6 @@ body {
     background: rgba(0, 0, 0, 0.98);
     border-bottom: 1px solid rgba(195, 117, 255, 0.12);
     z-index: 1000;
-    display: flex;
-    align-items: center;
 }
 
 .inner-bar {
@@ -62,23 +59,15 @@ body {
     color: var(--accent);
 }
 
-/* Cards — sharp corners except bottom-right bevel */
+/* Cards — ONLY bottom-right bevel, all other corners sharp */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 48px 52px;
     margin-bottom: 48px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0;
     border-bottom-right-radius: 22px;
-    corner-shape: bevel; /* only bottom-right bevel */
-    transition: all 0.3s ease;
-}
-
-/* No hover movement — just subtle shadow */
-.card:hover {
-    box-shadow: 0 20px 40px rgba(195, 117, 255, 0.12);
+    corner-shape: bevel;
 }
 
 /* Two-column on home */
@@ -88,9 +77,9 @@ body {
     gap: 32px;
 }
 
-/* Content area with breathing room */
+/* Breathing room below top bar */
 main {
-    padding-top: 150px; /* more space below top bar */
+    padding-top: 150px;
     max-width: 740px;
     margin: 0 auto;
     padding-left: 20px;
@@ -98,7 +87,7 @@ main {
     padding-bottom: 140px;
 }
 
-/* Footer aligned to content */
+/* Footer */
 footer {
     max-width: 740px;
     margin: 0 auto;
@@ -108,7 +97,7 @@ footer {
     font-size: 0.92rem;
 }
 
-/* ================= MOBILE / NARROW (<768px) ================= */
+/* ================= MOBILE HAMBURGER (hidden on desktop) ================= */
 @media (max-width: 768px) {
     .inner-bar {
         padding: 0 16px;
@@ -116,13 +105,10 @@ footer {
     .logo img {
         height: 42px;
     }
-
-    /* Hide desktop nav */
     .main-nav {
         display: none;
     }
 
-    /* Hamburger */
     .hamburger {
         font-size: 30px;
         cursor: pointer;
@@ -133,7 +119,6 @@ footer {
         display: none;
     }
 
-    /* Dropdown */
     .mobile-nav {
         display: none;
         position: absolute;
@@ -158,6 +143,7 @@ footer {
     }
     .card {
         padding: 36px 28px;
+        border-bottom-right-radius: 18px;
     }
     .two-column {
         grid-template-columns: 1fr;
@@ -165,7 +151,7 @@ footer {
     }
 }
 
-/* Hide mobile elements on wide screens */
+/* Hide hamburger + dropdown completely on desktop */
 @media (min-width: 769px) {
     .hamburger,
     .menu-toggle,

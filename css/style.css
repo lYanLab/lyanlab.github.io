@@ -15,13 +15,13 @@ body {
     font-family: "Inter", system-ui, sans-serif;
 }
 
-/* Top Bar — smaller & sleek */
+/* Top Bar — smaller, logo left, menu aligned with content */
 .top-bar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 68px;
+    height: 66px;
     background: rgba(0, 0, 0, 0.98);
     border-bottom: 1px solid rgba(195, 117, 255, 0.12);
     z-index: 1000;
@@ -34,14 +34,14 @@ body {
     padding: 0 24px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 32px;
 }
 
 .logo img {
     height: 46px;
 }
 
-/* Desktop nav */
+/* Desktop nav — starts right after logo, aligned with content */
 .main-nav {
     display: flex;
     gap: 32px;
@@ -59,7 +59,7 @@ body {
     color: var(--accent);
 }
 
-/* Cards — ONLY bottom-right bevel, all other corners sharp */
+/* Cards — ONLY bottom-right bevel, everything else sharp */
 .card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
@@ -87,7 +87,7 @@ main {
     padding-bottom: 140px;
 }
 
-/* Footer */
+/* Footer aligned to content */
 footer {
     max-width: 740px;
     margin: 0 auto;
@@ -97,8 +97,8 @@ footer {
     font-size: 0.92rem;
 }
 
-/* ================= MOBILE HAMBURGER (hidden on desktop) ================= */
-@media (max-width: 768px) {
+/* ================= HAMBURGER ONLY ≤480px ================= */
+@media (max-width: 480px) {
     .inner-bar {
         padding: 0 16px;
     }
@@ -122,7 +122,7 @@ footer {
     .mobile-nav {
         display: none;
         position: absolute;
-        top: 68px;
+        top: 66px;
         left: 0;
         right: 0;
         background: rgba(0, 0, 0, 0.98);
@@ -151,8 +151,8 @@ footer {
     }
 }
 
-/* Hide hamburger + dropdown completely on desktop */
-@media (min-width: 769px) {
+/* Force horizontal nav on everything >480px */
+@media (min-width: 481px) {
     .hamburger,
     .menu-toggle,
     .mobile-nav {
